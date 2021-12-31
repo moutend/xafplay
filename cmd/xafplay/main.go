@@ -34,6 +34,9 @@ func run() error {
 	// Capture SIGINT signal.
 	signal.Notify(signalChan, syscall.SIGINT)
 
+	// Treat SIGTSTP as SIGINT because afplay doesn't support resume and pause.
+	signal.Notify(signalChan, syscall.SIGTSTP)
+
 	isPlaying := true
 	now := time.Now()
 
